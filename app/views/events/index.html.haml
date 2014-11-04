@@ -1,0 +1,19 @@
+%h1 All Events
+%table.table-bordered
+  %thead
+    %tr
+      %th Event ID
+      %th Event Type
+      %th URL
+      %th IP Address
+      %th
+  %tbody
+    - @events.each do |event|
+      %tr
+        %td= event.id
+        %td= event.type
+        %td= event.url
+        %td= event.ip_address
+        %td= link_to 'Show', @event
+        %td= link_to 'Edit', edit_event_path(@event)
+        %td= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }
