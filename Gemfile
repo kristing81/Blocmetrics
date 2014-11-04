@@ -40,6 +40,13 @@ gem 'haml-rails'
 
 gem 'pundit'
 
+gem "google_visualr", ">= 2.1"
+
+gem 'httparty', '~> 0.13.1'
+
+gem 'rubysl-securerandom', '~> 2.0.0'
+
+gem 'nokogiri', '~> 1.6.3.1'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
