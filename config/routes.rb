@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
+
   devise_for :users
+
+  resources :tracked_domains 
+  resources :events
+    
  
-  root to: 'home#index' 
+  root to: 'tracked_domains#index' 
 end

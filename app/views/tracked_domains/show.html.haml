@@ -1,0 +1,16 @@
+%h3.col.md-6= @tracked_domain.name
+%p= @tracked_domain.description
+%p= @tracked_domain.url
+%p= @tracked_domain.verification_code
+
+%br
+= link_to "Edit tracked_domain", edit_tracked_domain_path(@tracked_domain), class: 'btn btn-success btn-sm'
+= link_to "Delete tracked_domain", @tracked_domain, method: :delete, class: 'btn btn-danger btn-sm', data: {confirm: 'Are you sure you want to delete this tracked_domain?'}
+
+
+%hr
+-if @tracked_domain.verified?
+  .badge.badge-info
+    This is a verified tracked domain.
+
+      

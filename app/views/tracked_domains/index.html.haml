@@ -1,0 +1,19 @@
+%h1 All Tracked Domains
+%table.table-bordered
+  %thead
+    %tr
+      %th Name
+      %th Description
+      %th URL
+      %th Verified
+      %th
+  %tbody
+    - @tracked_domains.each do |tracked_domain|
+      %tr
+        %td= tracked_domain.name
+        %td= tracked_domain.description
+        %td= tracked_domain.url
+        %td= tracked_domain.verified?
+        %td= link_to 'Show', @tracked_domain
+        %td= link_to 'Edit', edit_tracked_domain_path(@tracked_domain)
+        %td= link_to 'Destroy', tracked_domain, method: :delete, data: { confirm: 'Are you sure?' }

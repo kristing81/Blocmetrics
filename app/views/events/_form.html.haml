@@ -1,0 +1,16 @@
+= form_for @event do |f|
+  = f.label :event_type
+  = f.radio_button(:event_type, 'Page View') 
+  Page View
+  = f.radio_button(:event_type, 'Click') 
+  Click
+  %br
+  =f.label :url
+  =f.url_field :url, class: 'form-control'
+
+  = f.label :ip_address
+  = f.text_field :ip_address, class: 'form-control'
+  
+  =f.submit "Save", class: 'btn btn-success btn-sm'
+
+  

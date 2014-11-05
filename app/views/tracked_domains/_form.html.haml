@@ -1,0 +1,17 @@
+= form_for @tracked_domain do |f|
+  = f.label :name
+  = f.text_field :name, class: 'form-control'
+ 
+  = f.label :description
+  = f.text_field :description, rows: 8, class: 'form-control'
+
+  = f.label :url
+  = f.url_field :url, class: 'form-control'
+
+  = f.label :verification_code
+  = f.text_field :verification_code, class: 'form-control'
+
+  = f.label :verified
+  = f.check_box :verified 
+  %br
+  =f.submit "Save", class: 'btn btn-success btn-sm'
