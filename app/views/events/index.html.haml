@@ -1,19 +1,27 @@
-%h1 All Events
-%table.table-bordered
-  %thead
+- @page_title ="Events"
+.container
+  %h1 Events
+  %table.table.table-bordered.table-hover
     %tr
       %th Event ID
       %th Event Type
       %th URL
       %th IP Address
-      %th
-  %tbody
-    - @events.each do |event|
-      %tr
-        %td= event.id
-        %td= event.type
-        %td= event.url
-        %td= event.ip_address
-        %td= link_to 'Show', @event
-        %td= link_to 'Edit', edit_event_path(@event)
-        %td= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' }
+      %th Actions
+      - @events.each do |event|
+        %tr
+          %td= event.id
+          %td= event.event_type
+          %td= event.url
+          %td= event.ip_address
+          %td
+            = link_to 'Show Event', {:action => 'show', :id => event.id, :tracked_domain_id => @tracked_domain.id }
+            |
+            = link_to 'Edit', {:action => 'edit', :id => event.id, :tracked_domain_id => @tracked_domain.id }
+            |
+            = link_to 'Delete', @event, method: :delete, data: { confirm: 'Are you sure you want to delete this event?' }
+
+
+
+  = link_to "Add New Event", {:action => 'new', :tracked_domain_id => @tracked_domain.id }, class: 'btn btn-success'
+  = link_to "Back to Tracked Domain", {:controller => 'tracked_domains', :action => 'show', :tracked_domain_id => @tracked_domain.id }, class: 'btn btn-success'

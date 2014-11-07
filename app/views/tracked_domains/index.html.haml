@@ -1,19 +1,35 @@
-%h1 All Tracked Domains
-%table.table-bordered
-  %thead
+- @page_title ="Tracked Domains"
+.container
+  %h1 Tracked Domains
+
+  %div
+    = pluralize(@tracked_domains.size, 'tracked domain')
+    found
+  %br
+  %table.table.table-bordered.table-hover
     %tr
       %th Name
       %th Description
       %th URL
+      %th Verification Code
       %th Verified
-      %th
-  %tbody
-    - @tracked_domains.each do |tracked_domain|
-      %tr
-        %td= tracked_domain.name
-        %td= tracked_domain.description
-        %td= tracked_domain.url
-        %td= tracked_domain.verified?
-        %td= link_to 'Show', @tracked_domain
-        %td= link_to 'Edit', edit_tracked_domain_path(@tracked_domain)
-        %td= link_to 'Destroy', tracked_domain, method: :delete, data: { confirm: 'Are you sure?' }
+      %th Actions
+      - @tracked_domains.each do |tracked_domain|
+        %tr
+          %td= tracked_domain.name
+          %td= tracked_domain.description
+          %td= tracked_domain.url
+          %td= tracked_domain.verification_code
+          %td= tracked_domain.verified?
+          %td
+            = link_to 'View Events', {:controller => 'events', :tracked_domain_id => tracked_domain.id}
+            |
+            = link_to 'Show', {:action => 'show', :id => tracked_domain.id}
+            |
+            = link_to 'Edit', {:action => 'edit', :id => tracked_domain.id}
+            |
+            = link_to 'Delete', tracked_domain, method: :delete, data: { confirm: 'Are you sure you want to delete this tracked domain?' }
+    
+  = link_to "Add New Tracked Domain", new_tracked_domain_path, class: 'btn btn-default' 
+  
+

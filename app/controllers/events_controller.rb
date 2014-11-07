@@ -1,11 +1,16 @@
 class EventsController < ApplicationController
+  respond_to :html, :js
+
+  attr_accessor :tracked_domain_id
+  
+  before_action :find_tracked_domain
   
   def index
-    @event = Event.recent
+    @events = @tracked_domain.events.recent
   end
 
   def show
-    @event = Event.find(params[:id])
+    @event = @tracked_domain.events.find(params[:id])
   end
 
   def new
@@ -23,11 +28,11 @@ class EventsController < ApplicationController
   end
 
   def edit
-    @event = Event.find(params[:id])
+    @event = @tracked_domain.events.find(params[:id])
   end
 
   def update
-    @event = Event.find(params[:id])
+    @event = @tracked_domain.events.find(params[:id])
     if @event.update_attributes(event_params)
       flash[:notice] = "Event updated successfully."
       redirect_to(:action => 'index')
@@ -37,11 +42,11 @@ class EventsController < ApplicationController
   end
 
   def delete
-    @event = Event.find(params[:id])
+    @event = @tracked_domain.events.find(params[:id])
   end
 
   def destroy
-    @event = Event.find(params[:id]).destroy
+    @event = @tracked_domain.events.find(params[:id]).destroy
     flash[:notice] = "Event deleted successfully."
     redirect_to(:action => 'index')
   end
@@ -49,6 +54,12 @@ class EventsController < ApplicationController
   private
 
   def event_params
-    params.require(:event).permit(:event_type, :url, :ip_address, :created_at, :updated_at) 
+    params.require(:event).permit(:tracked_domain_id, :event_type, :url, :ip_address, :created_at, :updated_at) 
+  end
+
+  def find_tracked_domain
+    if params[:tracked_domain_id]
+      @tracked_domain = current_user.tracked_domains.find(params[:tracked_domain_id])  
+    end
   end
 end

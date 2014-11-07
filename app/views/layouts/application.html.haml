@@ -6,25 +6,35 @@
     = javascript_include_tag "https://js.stripe.com/v1/", "application", "data-turbolinks-track" => true
     = csrf_meta_tags
   %body
-    .container
+    .navbar.navbar-default.navbar-fixed-top 
+      .navbar-header
+        %button.navbar-toggle{type: "button", "data-toggle" => "collapse", "data-target" => ".navbar-collapse"}
+          %span.sr-only
+            | Toggle navigation
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        .collapse.navbar-collapse
+          %ul.nav.navbar-nav
+            %li= link_to "Tracked Domains", tracked_domains_path 
       .pull-right.user-info
         - if current_user
           Hello #{current_user.email}! #{link_to "Sign out", destroy_user_session_path, method: :delete}
         - else
-          = link_to "Sign in", new_user_session_path
+          = link_to "Sign in", new_user_session_path, class: 'btn btn-default'
           or
-          \#{link_to "Sign up", new_user_registration_path} 
+          \#{link_to "Sign up", new_user_registration_path}, class: 'btn btn-primary'
 
-    - if flash[:notice]
-      .alert.alert-success
-        %button.close{"data-dismiss" => "alert", :type => "button"} ×
-        = flash[:notice]
-    - elsif flash[:error]
-      .alert.alert-danger
-        %button.close{"data-dismiss" => "alert", :type => "button"} ×
-        = flash[:error]
-    - elsif flash[:alert]
-      .alert.alert-warning
-        %button.close{"data-dismiss" => "alert", :type => "button"} ×
-        = flash[:alert]
+      - if flash[:notice]
+        .alert.alert-success
+          %button.close{"data-dismiss" => "alert", :type => "button"} ×
+          = flash[:notice]
+      - elsif flash[:error]
+        .alert.alert-danger
+          %button.close{"data-dismiss" => "alert", :type => "button"} ×
+          = flash[:error]
+      - elsif flash[:alert]
+        .alert.alert-warning
+          %button.close{"data-dismiss" => "alert", :type => "button"} ×
+          = flash[:alert]
     = yield

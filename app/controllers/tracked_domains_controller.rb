@@ -1,7 +1,9 @@
-class TrackedDomainsController < ApplicationController
+class TrackedDomainsController < ApplicationController 
 
+  before_filter :authenticate_user!
+  
   def index
-    @tracked_domain = TrackedDomain.recent
+    @tracked_domains = TrackedDomain.recent
   end
 
   def show
@@ -16,7 +18,7 @@ class TrackedDomainsController < ApplicationController
     @tracked_domain = TrackedDomain.new(td_params)
     if @tracked_domain.save
       flash[:notice] = "Tracked Domain created uccessfully."
-      redirect_to(:action => 'index')
+      redirect_to @tracked_domain
     else
       render :new  
     end  
@@ -30,7 +32,7 @@ class TrackedDomainsController < ApplicationController
     @tracked_domain = TrackedDomain.find(params[:id])
     if @tracked_domain.update_attributes(td_params)
       flash[:notice] = "Tracked Domain #{@tracked_domain.name} updated successfully."
-      redirect_to(:action => 'index')
+      redirect_to @tracked_domain
     else
       render :edit
     end   
@@ -42,7 +44,7 @@ class TrackedDomainsController < ApplicationController
 
   def destroy
     @tracked_domain = TrackedDomain.find(params[:id])
-    flash[:notice] = "Tracked Domain #{tracked_domain.name} deleted successfully."
+    flash[:notice] = "Tracked Domain deleted successfully."
     redirect_to(:action => 'index')
   end
 

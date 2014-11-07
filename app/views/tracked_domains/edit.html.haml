@@ -3,3 +3,5 @@
   .col-md-4
     .col-md-8
 = render partial: 'form', locals: { tracked_domain: @tracked_domain} 
+%br
+= link_to "Back to #{@tracked_domain.name}", tracked_domain_path(@tracked_domain), class: 'btn btn-default btn-sm'
