@@ -10,13 +10,8 @@ class TrackedDomain < ActiveRecord::Base
   scope :recent, lambda { order("tracked_domains.updated_at DESC, tracked_domains.created_at DESC") }
 
   def check_verification
-    url = tracked_domain.url
-    # Use HTTParty to fetch the HTML of the trakced domain.
-    response = HTTParty.get(url)
-    # Use nokogiri using XPATH to get the content of the meta tag and compare to current tracked domain verification code.
-    doc = Nokogiri::HTML(open(url).read)
-    vercode = doc.xpath("//meta")
-    # return true or false
+    doc = Nokogiri::HTML(HTTParty.get(tracked_domain.url))
+    vercode = doc.xpath("//meta[@name='verification_code']/@content).first")
     if vercode == tracked_domain.verification_code
       puts "The Domain has been verified"
     else
