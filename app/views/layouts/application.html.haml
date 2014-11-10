@@ -16,7 +16,7 @@
           %span.icon-bar
         .collapse.navbar-collapse
           %ul.nav.navbar-nav
-            %li= link_to "Tracked Domains", tracked_domains_path 
+            %li= link_to "Tracked Domains", tracked_domains_path
       .pull-right.user-info
         - if current_user
           Hello #{current_user.email}! #{link_to "Sign out", destroy_user_session_path, method: :delete}

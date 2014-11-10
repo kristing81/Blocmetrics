@@ -1,4 +1,4 @@
-= form_for tracked_domain_events_path(tracked_domain), remote: true do |f|
+= form_for tracked_domain_events_path(tracked_domain), class: 'form-horizontal', remote: true do |f|
   .form-group
   = f.label(:tracked_domain_id, "Tracked Domain") 
   = f.select(:tracked_domain_id, @tracked_domains.map {|t| [t.name, t.id]})

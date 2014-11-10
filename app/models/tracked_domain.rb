@@ -1,6 +1,4 @@
 class TrackedDomain < ActiveRecord::Base
-  require 'HTTParty'
-  require 'nokogiri'
 
   belongs_to :user
   has_many :events
@@ -10,12 +8,13 @@ class TrackedDomain < ActiveRecord::Base
   scope :recent, lambda { order("tracked_domains.updated_at DESC, tracked_domains.created_at DESC") }
 
   def check_verification
-    doc = Nokogiri::HTML(HTTParty.get(tracked_domain.url))
-    vercode = doc.xpath("//meta[@name='verification_code']/@content).first")
-    if vercode == tracked_domain.verification_code
-      puts "The Domain has been verified"
+    doc = Nokogiri::HTML(HTTParty.get(self.url))
+    vercode = doc.xpath("//meta[@name='verfication_token']").first["content"]
+    if vercode == self.verification_code
+      self.verified = true
+      return self.save
     else
-      puts "This Domain is not verified"
+      return false
     end
   end
 

@@ -5,8 +5,11 @@
   %p= @tracked_domain.verification_code
 
   %br
-  = link_to "View Events", tracked_domain_events_path(@tracked_domain), class: 'btn btn-default btn-sm'
-  = link_to "Add Events", new_tracked_domain_event_path(@tracked_domain), class: 'btn btn-info btn-sm'
+
+  - if @tracked_domain.verified == false
+    = link_to "Check Verification", verification_url(@tracked_domain), method: :put
+  - else 
+    = link_to "View Events", tracked_domain_events_path(@tracked_domain), class: 'btn btn-default btn-sm'
   = link_to "Edit ", edit_tracked_domain_path(@tracked_domain), class: 'btn btn-success btn-sm'
   = link_to "Delete ", @tracked_domain, method: :delete, class: 'btn btn-danger btn-sm', data: {confirm: 'Are you sure you want to delete this tracked_domain?'}
 

@@ -4,6 +4,8 @@ class EventsController < ApplicationController
   attr_accessor :tracked_domain_id
   
   before_action :find_tracked_domain
+
+  before_filter :set_headers
   
   def index
     @events = @tracked_domain.events.recent
@@ -61,5 +63,13 @@ class EventsController < ApplicationController
     if params[:tracked_domain_id]
       @tracked_domain = current_user.tracked_domains.find(params[:tracked_domain_id])  
     end
+  end
+
+  def set_headers
+    headers['Access-Control-Allow-Origin'] = '*'
+    headers['Access-Control-Expose-Headers'] = 'ETag'
+    headers['Access-Control-Allow-Methods'] = 'GET, POST, PATCH, PUT, DELETE, OPTIONS, HEAD'
+    headers['Access-Control-Allow-Headers'] = '*,x-requested-with,Content-Type,If-Modified-Since,If-None-Match'
+    headers['Access-Control-Max-Age'] = '1728000'
   end
 end
