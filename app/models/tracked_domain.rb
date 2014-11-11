@@ -9,7 +9,7 @@ class TrackedDomain < ActiveRecord::Base
 
   def check_verification
     doc = Nokogiri::HTML(HTTParty.get(self.url))
-    vercode = doc.xpath("//meta[@name='verfication_token']").first["content"]
+    vercode = doc.xpath("//meta[@name='verification_token']").first["content"]
     if vercode == self.verification_code
       self.verified = true
       return self.save
