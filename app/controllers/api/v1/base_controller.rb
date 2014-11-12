@@ -2,7 +2,7 @@ class Api::V1::BaseController < ApplicationController
 
   respond_to :json
 
-  before_filter :set_headers
+  after_filter :set_headers
 
   def set_headers
     headers['Access-Control-Allow-Origin'] = '*'
