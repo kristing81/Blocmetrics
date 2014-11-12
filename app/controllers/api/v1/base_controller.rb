@@ -1,6 +1,6 @@
 class Api::V1::BaseController < ApplicationController
 
-  responds_to :json
+  respond_to :json
 
   before_filter :set_headers
 
