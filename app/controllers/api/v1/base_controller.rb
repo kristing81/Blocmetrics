@@ -4,7 +4,6 @@ class Api::V1::BaseController < ApplicationController
 
   before_filter :set_headers
 
-  
   def set_headers
     headers['Access-Control-Allow-Origin'] = '*'
     headers['Access-Control-Expose-Headers'] = 'ETag'
