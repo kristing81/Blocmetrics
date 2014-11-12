@@ -14,7 +14,7 @@ Rails.application.routes.draw do
     end
   end
   
-  match 'events' => "events#index", via: :options
+  match 'api/v1/events.json' => "api/v1/events#index", via: :options
 
   root 'tracked_domains#index' 
 
