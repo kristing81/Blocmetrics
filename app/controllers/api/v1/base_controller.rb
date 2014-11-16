@@ -12,8 +12,6 @@ class Api::V1::BaseController < ApplicationController
     headers['Access-Control-Allow-Methods'] = 'GET, POST, PATCH, PUT, DELETE, OPTIONS, HEAD'
     headers['Access-Control-Allow-Headers'] = '*,x-requested-with,Content-Type,If-Modified-Since,If-None-Match'
     headers['Access-Control-Max-Age'] = '86400'
-    end
   end
-
 end
       
