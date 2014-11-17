@@ -44,8 +44,12 @@ class TrackedDomainsController < ApplicationController
 
   def destroy
     @tracked_domain = TrackedDomain.find(params[:id])
+    if @tracked_domain.destroy
     flash[:notice] = "Tracked Domain deleted successfully."
-    redirect_to(:action => 'index')
+    else
+     flash[:error] = "There was an error deleting the tracked_domain."
+    end
+    redirect_to tracked_domains_path
   end
 
   private

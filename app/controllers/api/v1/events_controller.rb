@@ -12,6 +12,11 @@ class Api::V1::EventsController < Api::V1::BaseController
     end
   end
 
+  
+  def index
+    @events = Event.all
+  end
+
   private
 
   def event_params
