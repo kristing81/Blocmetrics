@@ -14,7 +14,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      resources :events, only: [:create, :index]
+      match 'events' => "events#index", via: :options
+      resources :events, only: [:create, :index, :show]
     end
   end
   

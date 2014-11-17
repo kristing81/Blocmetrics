@@ -7,7 +7,7 @@
   %br
 
   - if @tracked_domain.verified == false
-    = link_to "Check Verification", verification_url(@tracked_domain), method: :put
+    = link_to "Check Verification", verification_path(@tracked_domain), method: :put
   - else 
     = link_to "View Events", tracked_domain_events_path(@tracked_domain), class: 'btn btn-default btn-sm'
   = link_to "Edit ", edit_tracked_domain_path(@tracked_domain), class: 'btn btn-success btn-sm'
