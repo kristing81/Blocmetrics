@@ -1,0 +1,24 @@
+.container
+  .row
+    %h2 Web Analytics API Tracking Tool
+    %h4 Add a little javascript snippet to your website and gather data about how people use your site.
+    %h4 Getting started is as easy as 1...2...3
+  .row
+    %ol
+    %li
+      = link_to "Sign Up", new_user_registration_path
+      and add your domain to your 
+      %em Tracked Domain 
+      list
+    %li 
+      Add a link to our Javascript file in your site.  Copy and paste the below script tag to your application file.
+      %br
+      %samp //kristingonzalez-blocmetrics.herokuapp.com/agent.js
+    %li 
+      Watch your site's activity get tracked in your 
+      %em Events 
+      log
+  .row
+  %br
+  %p For more information you can view the most recent instructions on
+  = link_to  "Github", "https://github.com/kristing81/Blocmetrics", class: "btn btn-default btn-sm btn-block"

@@ -1,0 +1,16 @@
+- @page_title ="Events"
+.container
+  %h1 Events
+  %table.table.table-bordered.table-hover
+    %tr
+      %th Event ID
+      %th Event Type
+      %th URL
+      %th IP Address
+      - @events.each do |event|
+        %tr
+          %td= event.id
+          %td= event.event_type
+          %td= event.url
+          %td= event.ip_address
+        
