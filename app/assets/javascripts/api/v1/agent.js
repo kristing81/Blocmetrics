@@ -5,7 +5,7 @@ var blocmetrics = (function (tracked_domain_id, event_type) {
     }
 
     var _bm_request = new XMLHttpRequest();
-    _bm_request.open("POST", "http://localhost:4000.com/events.json", true);
+    _bm_request.open("POST", "https://kristingonzalez-blocmetrics.herokuapp.com/api/v1/events.json", true);
     _bm_request.setRequestHeader('Content-Type', 'application/json');
     _bm_request.onreadystatechange = function () {
 
