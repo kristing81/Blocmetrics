@@ -17,7 +17,7 @@ class Api::V1::BaseController < ApplicationController
 
   def preflight_check
     headers["Access-Control-Allow-Origin"] = "*"
-    headers["Access-Control-Allow-Methods"] = %w{GET POST PUT DELETE}.join(",")
+    headers["Access-Control-Allow-Methods"] = %w{GET POST PUT DELETE OPTIONS}.join(",")
     headers["Access-Control-Allow-Headers"] = %w{Origin Accept Content-Type X-Requested-With X-CSRF-Token}.join(",")
     headers['Access-Control-Allow-Headers'] = '*,x-requested-with,Content-Type,If-Modified-Since,If-None-Match'
   end
