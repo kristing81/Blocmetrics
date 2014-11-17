@@ -16,6 +16,7 @@ class TrackedDomainsController < ApplicationController
 
   def create
     @tracked_domain = TrackedDomain.new(td_params)
+    @tracked_domain.user = current_user
     if @tracked_domain.save
       flash[:notice] = "Tracked Domain created uccessfully."
       redirect_to @tracked_domain
