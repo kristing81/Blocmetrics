@@ -1,7 +1,9 @@
-var blocmetrics = function (tracked_domain_id, event_type) {
+var blocmetrics = function (tracked_domain, event_type) {
     var _bm_event = {
-        tracked_domain_id: tracked_domain_id,
+        event : {
+        tracked_domain: tracked_domain,
         event_type: event_type
+        }
     }
 
     var _bm_request = new XMLHttpRequest();
@@ -15,5 +17,6 @@ var blocmetrics = function (tracked_domain_id, event_type) {
     _bm_request.send(JSON.stringify(_bm_event));
 };
 
+blocmetrics('tracked_domain', 'event_type')
 
 // = javascript_include_tag "http://kristingonzalez-blocmetrics.herokuapp.com/api/v1/agent.js"
