@@ -14,7 +14,7 @@ class Api::V1::EventsController < Api::V1::BaseController
 
   
   def index
-    @events = Event.all
+    render nothing: true, status: :ok
   end
 
   private
