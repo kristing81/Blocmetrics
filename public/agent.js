@@ -1,5 +1,4 @@
-
-var Blocmetrics = {
+var blocmetrics = {
     report: function(tracked_domain_id, event_type) {
         var _bm_event = {
         tracked_domain_id: tracked_domain_id,
