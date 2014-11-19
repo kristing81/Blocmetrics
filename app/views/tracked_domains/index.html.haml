@@ -21,13 +21,9 @@
           %td= tracked_domain.url
           %td= tracked_domain.verification_code
           %td= tracked_domain.verified?
-          %td 
-            = link_to 'View Events', tracked_domain_events_path(tracked_domain.id)
-            |
+          %td  |
             = link_to 'Show', tracked_domain_path(tracked_domain.id)
-            |
             = link_to 'Edit', edit_tracked_domain_path(tracked_domain.id)
-            |
             = link_to 'Delete', tracked_domain_path(tracked_domain.id), method: :delete, data: { confirm: 'Are you sure you want to delete this tracked domain?' }
     
   = link_to "Add New Tracked Domain", new_tracked_domain_path, class: 'btn btn-default' 

@@ -1,24 +1,41 @@
 .container
   .row
-    %h2 Web Analytics API Tracking Tool
-    %h4 Add a little javascript snippet to your website and gather data about how people use your site.
-    %h4 Getting started is as easy as 1...2...3
-  .row
-    %ol
-    %li
-      = link_to "Sign Up", new_user_registration_path
-      and add your domain to your 
-      %em Tracked Domain 
-      list
-    %li 
-      Add a link to our Javascript file in your site.  Copy and paste the below script tag to your application file.
+    .col-md-8
+      %h3 Web Analytics API Tracking Tool
+      %h4 Add a little javascript snippet to your website and gather data about how people use your site.
+      %h4 Getting started is as easy as 1...2...3
+   
+      - if current_user
+        Hey there 
+        %b #{current_user.email}!  
+        Your authentication token is 
+        %b #{current_user.authentication_token}.
+        %br
+        Be sure to add this token to your site's application file.  It'll help us confirm your site.
+        %br
+        %br
+        %samp.small meta content="#{current_user.authentication_token}" name="authentication_token
+      - else
+        = link_to "Sign in", new_user_session_path
+        or
+        \#{link_to "Sign up", new_user_registration_path}
       %br
-      %samp //kristingonzalez-blocmetrics.herokuapp.com/agent.js
-    %li 
-      Watch your site's activity get tracked in your 
-      %em Events 
-      log
-  .row
+      %br
+      %ol.list-group
+        %li.list-group-item
+          = link_to "Sign Up", new_user_registration_path
+          and add your domain to your 
+          %em Tracked Domain 
+          list.  Don't forget about the authentication token too!
+        %li.list-group-item 
+          Add a link to our Javascript file in your site.  Copy and paste the below script tag to your application file.
+          %br
+          %samp.small //kristingonzalez-blocmetrics.herokuapp.com/agent.js
+        %li.list-group-item 
+          Watch your site's activity get tracked in your 
+          %em Events 
+          log
+  .row.col-md-4
   %br
   %p For more information you can view the most recent instructions on
-  = link_to  "Github", "https://github.com/kristing81/Blocmetrics", class: "btn btn-default btn-sm btn-block"
+  = link_to  "Github", "https://github.com/kristing81/Blocmetrics", class: "btn btn-default btn-sm"

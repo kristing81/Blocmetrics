@@ -13,4 +13,7 @@
           %td= event.event_type
           %td= event.url
           %td= event.ip_address
-        
+
+
+#chart{:style => "width: 700px; height: 240px;"}
+= render_chart @chart, 'chart'
