@@ -1,8 +1,8 @@
 var blocmetrics = {
-    report: function(tracked_domain_id, event_type) {
+    report: function(auth_token, event_type) {
         var _bm_event = {
-        tracked_domain_id: tracked_domain_id,
-        event_type: event_type
+            auth_token: auth_token,
+            event_type: event_type
         }
 
         var _bm_request = new XMLHttpRequest();

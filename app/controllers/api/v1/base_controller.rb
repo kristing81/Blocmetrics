@@ -1,11 +1,15 @@
 class Api::V1::BaseController < ApplicationController
 
   respond_to :json
+
   skip_before_action :verify_authenticity_token
+
+  before_filter :authenticate_user_from_token!
+  before_filter :authenticate_user!
+  
   before_filter :preflight_check
   after_filter :set_headers
 
-  private
 
   def set_headers
     headers['Access-Control-Allow-Origin'] = '*'
@@ -22,6 +26,15 @@ class Api::V1::BaseController < ApplicationController
       headers["Access-Control-Allow-Headers"] = %w{Origin Accept Content-Type X-Requested-With X-CSRF-Token}.join(",")
       headers['Access-Control-Allow-Headers'] = '*,x-requested-with,Content-Type,If-Modified-Since,If-None-Match'
       render nothing: true
+    end
+  end
+
+  def authenticate_user_from_token!
+    user_auth_token = params[:auth_token]
+
+    user = User.where(authentication_token: user_auth_token).first
+    if user
+      sign_in(user, store: false)
     end
   end
 end
