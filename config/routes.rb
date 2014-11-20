@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   end
   
   #options 'api/v1/events.json' => "api/v1/events#index"
-  match '/api/v1/events.json' => "/api/v1/events#index", via: :options
+  match 'api/v1/events.json' => "api/v1/events#index", via: :options
   get 'get_started' => 'welcome#get_started', path: 'get_started'
 
   root 'welcome#index' 
