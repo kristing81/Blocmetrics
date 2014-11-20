@@ -4,10 +4,11 @@ class Api::V1::BaseController < ApplicationController
 
   skip_before_action :verify_authenticity_token
 
+  before_filter :preflight_check
+  
   before_filter :authenticate_user_from_token!
   before_filter :authenticate_user!
 
-  before_filter :preflight_check
   after_filter :set_headers
 
 
