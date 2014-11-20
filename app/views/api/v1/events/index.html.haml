@@ -1,19 +1,19 @@
-- @page_title ="Events"
-.container
-  %h1 Events
-  %table.table.table-bordered.table-hover
-    %tr
-      %th Event ID
-      %th Event Type
-      %th URL
-      %th IP Address
-      - @events.each do |event|
-        %tr
-          %td= event.id
-          %td= event.event_type
-          %td= event.url
-          %td= event.ip_address
+/ - @page_title ="Events"
+/ .container
+/   %h1 Events
+/   %table.table.table-bordered.table-hover
+/     %tr
+/       %th Event ID
+/       %th Event Type
+/       %th URL
+/       %th IP Address
+/       - @events.each do |event|
+/         %tr
+/           %td= event.id
+/           %td= event.event_type
+/           %td= event.url
+/           %td= event.ip_address
 
-
+ <%= @events %>
 #chart{:style => "width: 700px; height: 240px;"}
 = render_chart @chart, 'chart'

@@ -1,12 +1,11 @@
 class Api::V1::EventsController < Api::V1::BaseController
 
+  attr_accessor :event, :event_type
 
   def create
     @tracked_domain = TrackedDomain.find(params[:verification_code])
-    # find a domain via the submitted verification token
     @event = @tracked_domain.event.new(event_params).to_json
     if @event.save
-    # record event
     render nothing: true, status:200
     else 
       render :new
@@ -16,24 +15,26 @@ class Api::V1::EventsController < Api::V1::BaseController
   
   def index
     render nothing: true, status: :ok
+    # @events = Event.all
+    # @event_type = "Page View"
+    # render :json => @events.to_json
   end
 
-  def chart
-  data_table = GoogleVisualr::DataTable.new
-  data_table.new_column('integer', 'Tracked Domain ID' )
-  data_table.new_column('string', 'Event Type')
-  data_table.new_column('string', 'URL')
-  data_table.new_column('string', 'IP address')
+  # def chart
+  # data_table = GoogleVisualr::DataTable.new
+  # data_table.new_column('string', 'Event Type')
+  # data_table.new_column('string', 'URL')
+  # data_table.new_column('string', 'Date')
+  # #I want to show page views per day
+  # data_table.add_rows(#)
+  #   #data_table.set_cell(0, 0, '2004')
+    # use JSON to parse(events) ???
 
-  # Add Rows and Values
-  data_table.add_rows([
-    ['2004', 1000, 400],
-    ['2005', 1170, 460],
-    ['2006', 660, 1120],
-    ['2007', 1030, 540]
-  ])
+  #   opts   = { :width => 400, :height => 240, :title => 'Daily Page Views', :hAxis => { :title => 'Date' } }
+  #   @chart = GoogleVisualr::Interactive::ColumnChart.new(data_table, opts)
 
-  end
+  # end
+  
   private
 
   def event_params

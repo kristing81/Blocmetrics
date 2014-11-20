@@ -14,7 +14,7 @@
         Be sure to add this token to your site's application file.  It'll help us confirm your site.
         %br
         %br
-        %samp.small meta content="#{current_user.authentication_token}" name="authentication_token
+        %samp.small meta content="#{current_user.authentication_token}" name="authentication_token"
       - else
         = link_to "Sign in", new_user_session_path
         or
