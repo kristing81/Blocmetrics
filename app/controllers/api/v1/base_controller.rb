@@ -6,7 +6,7 @@ class Api::V1::BaseController < ApplicationController
 
   before_filter :authenticate_user_from_token!
   before_filter :authenticate_user!
-  
+
   before_filter :preflight_check
   after_filter :set_headers
 
@@ -25,7 +25,7 @@ class Api::V1::BaseController < ApplicationController
       headers["Access-Control-Allow-Methods"] = %w{GET POST PUT DELETE OPTIONS}.join(",")
       headers["Access-Control-Allow-Headers"] = %w{Origin Accept Content-Type X-Requested-With X-CSRF-Token}.join(",")
       headers['Access-Control-Allow-Headers'] = '*,x-requested-with,Content-Type,If-Modified-Since,If-None-Match'
-      render nothing: true
+      render nothing: true and return
     end
   end
 

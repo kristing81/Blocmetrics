@@ -14,13 +14,12 @@ Rails.application.routes.draw do
 
   namespace :api do
     namespace :v1 do
-      match 'events' => "events#index", via: :options
       resources :events, only: [:create, :index, :show]
     end
   end
   
   #options 'api/v1/events.json' => "api/v1/events#index"
-  match 'events' => "events#index", via: :options
+  match '/api/v1/events.json' => "/api/v1/events#index", via: :options
   get 'get_started' => 'welcome#get_started', path: 'get_started'
 
   root 'welcome#index' 
