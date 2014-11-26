@@ -12,6 +12,16 @@ Rails.application.routes.draw do
   
   resources :verifications, only: [:update]
 
+  # constraints subdomain: 'api' do
+  #   scope module: 'api' do
+  #     namespace :v1 do
+
+  #       resources :events, only: [:create, :index, :show]
+
+  #     end
+  #   end
+  # end
+
   namespace :api do
     namespace :v1 do
       resources :events, only: [:create, :index, :show]
