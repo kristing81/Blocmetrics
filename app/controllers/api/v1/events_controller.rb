@@ -18,9 +18,7 @@ class Api::V1::EventsController < Api::V1::BaseController
 
   def index
     render nothing: true, status: :ok
-    # @events = Event.all
-    # @event_type = "Page View"
-    # render :json => @events.to_json
+    @events = Event.all
   end
 
   # def chart

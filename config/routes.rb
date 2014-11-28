@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  get 'welcome/index'
-
-  get 'welcome/get_started'
-
   devise_for :users
 
   resources :tracked_domains do
@@ -12,22 +8,13 @@ Rails.application.routes.draw do
   
   resources :verifications, only: [:update]
 
-  # constraints subdomain: 'api' do
-  #   scope module: 'api' do
-  #     namespace :v1 do
-
-  #       resources :events, only: [:create, :index, :show]
-
-  #     end
-  #   end
-  # end
-
   namespace :api do
     namespace :v1 do
-      resources :events, only: [:create, :index, :show]
+      resources :events, only: [:create, :index]
+      match 'events.json' => "events#create", via: :options, as: :events_options
     end
   end
-  
+
   #options 'api/v1/events.json' => "api/v1/events#index"
   match 'api/v1/events.json' => "api/v1/events#index", via: :options
   get 'get_started' => 'welcome#get_started', path: 'get_started'
