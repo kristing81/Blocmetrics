@@ -3,7 +3,9 @@ class Api::V1::EventsController < Api::V1::BaseController
   attr_accessor :event, :event_type
   before_filter :preflight_check
   after_filter :set_headers
- 
+  skip_before_filter :authenticate_user_from_token!
+  skip_before_filter :authenticate_user!
+
   def create
     # {auth_token: "", event_type: ""}
     # Rails request object
@@ -42,7 +44,7 @@ class Api::V1::EventsController < Api::V1::BaseController
   def event_params
     params.require(:event).permit(:tracked_domain_id, :event_type, :url, :ip_address, :created_at, :updated_at) 
   end
-  
+
    def set_headers
     headers['Access-Control-Allow-Origin'] = "*"
     headers['Access-Control-Allow-Methods'] = "POST, GET, OPTIONS"
