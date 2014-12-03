@@ -1,7 +1,8 @@
 class Api::V1::EventsController < Api::V1::BaseController
 
   attr_accessor :event, :event_type
-
+  before_filter :preflight_check
+  after_filter :set_headers
  
   def create
     # {auth_token: "", event_type: ""}
@@ -40,6 +41,23 @@ class Api::V1::EventsController < Api::V1::BaseController
 
   def event_params
     params.require(:event).permit(:tracked_domain_id, :event_type, :url, :ip_address, :created_at, :updated_at) 
+  end
+  
+   def set_headers
+    headers['Access-Control-Allow-Origin'] = "*"
+    headers['Access-Control-Allow-Methods'] = "POST, GET, OPTIONS"
+    headers['Access-Control-Allow-Headers'] = "Content-Type"
+    headers['Access-Control-Max-Age'] = '1728000'
+  end
+
+  def preflight_check
+    if request.method == :options
+      headers['Access-Control-Allow-Origin'] = '*'
+      headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
+      headers['Access-Control-Allow-Headers'] = 'X-Requested-With, X-Prototype-Version'
+      headers['Access-Control-Max-Age'] = '1728000'
+      render :text => '', :content_type => 'text/plain'
+    end
   end
 end
  
