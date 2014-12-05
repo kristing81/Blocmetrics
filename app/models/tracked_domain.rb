@@ -6,7 +6,7 @@ class TrackedDomain < ActiveRecord::Base
   before_create :set_verfication_code
 
   scope :recent, lambda { order("tracked_domains.updated_at DESC, tracked_domains.created_at DESC") }
-
+  scope :verified, -> {where(verified: true)}
   def check_verification
     doc = Nokogiri::HTML(HTTParty.get(self.url))
     vercode = doc.xpath("//meta[@name='verification_code']").first["content"]

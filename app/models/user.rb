@@ -1,3 +1,5 @@
+require 'uri'
+
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
@@ -6,7 +8,12 @@ class User < ActiveRecord::Base
 
   has_many :tracked_domains
 
-    before_save :ensure_authentication_token!
+  before_save :ensure_authentication_token!
+
+  def tracked_domain_from_url(url)
+    uri = URI.parse(url)
+    self.tracked_domains.verified.where(url: "#{uri.scheme}://#{uri.host}").first
+  end
 
   def generate_secure_token_string
     SecureRandom.urlsafe_base64(25).tr('lIO0', 'sxyz')

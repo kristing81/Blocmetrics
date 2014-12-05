@@ -1,20 +1,18 @@
 class Api::V1::EventsController < Api::V1::BaseController
 
-  attr_accessor :event, :event_type
-  
-  skip_before_filter :authenticate_user_from_token!
-  skip_before_filter :authenticate_user!
-
   def create
     # {auth_token: "", event_type: ""}
     # Rails request object
-    @tracked_domain = current_user.tracked_domains.where(params[user: :auth_token]).first.to_json
-    @event.ip_address = request.env["HTTP_REFERER"]
-    @event = Event.new
-    if @event.save
-      respond_with @event, location: api_v1_event_path(@event)
+    @tracked_domain = current_user.tracked_domain_from_url(request.referer)
+    if @tracked_domain.blank?
+      render nothing: true, status: :forbidden
     else
-      render json: {:error => "Invalid event"}, status: :unprocessable_entity 
+      @event = @tracked_domain.events.build(params[:event_params])
+      if @event.save
+        respond_with @event, location: api_v1_event_path(@event)
+      else
+        render json: {:error => "Invalid event"}, status: :unprocessable_entity 
+      end
     end
   end
 
