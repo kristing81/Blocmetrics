@@ -7,7 +7,7 @@ class Api::V1::BaseController < ApplicationController
   after_filter :set_headers
 
   # do not run those 2 if the request.method is :options
-  before_filter :authenticate_user_from_token
+  before_filter :authenticate_user_from_token!
 
   def authenticate_user_from_token!
     token = params[:auth_token]
