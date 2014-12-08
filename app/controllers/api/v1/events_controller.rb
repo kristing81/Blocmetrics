@@ -1,8 +1,6 @@
 class Api::V1::EventsController < Api::V1::BaseController
 
   def create
-    # {auth_token: "", event_type: ""}
-    # Rails request object
     @tracked_domain = current_user.tracked_domain_from_url(request.referer)
     if @tracked_domain.blank?
       render nothing: true, status: :forbidden
