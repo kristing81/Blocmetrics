@@ -13,9 +13,13 @@ Comprised of the following:
 
 - Sign Up and add your domain to your Tracked Domain list.
 - Add a link to our Javascript file in your site. Copy and paste the below script tag to your application file. 
-```//kristingonzalez-blocmetrics.herokuapp.com/agent.js```
+```
+//kristingonzalez-blocmetrics.herokuapp.com/agent.js
+```
 - Watch your site's activity get tracked in your Events log. Use your authentication token to submit custom events like this. 
-```blocmetrics.report("your_auth_token", "event_type(i.e. "page_view" or "click")")```
+```
+blocmetrics.report("your_auth_token", "event_type(i.e. "page_view" or "click")")
+```
 - Once you've added the script, your events will be tracked and you can view them on your dashboard.
 
 
